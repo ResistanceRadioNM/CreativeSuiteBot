@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resistance Radio Creative Suite Bot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1a1a1a;
+      color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #ff4757;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    select, textarea, input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      background: #333;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #ff4757;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #e84118;
+    }
+    .output {
+      margin-top: 30px;
+      background: #2f2f2f;
+      padding: 15px;
+      border-radius: 5px;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Resistance Radio Creative Suite Bot</h1>
+    <div class="input-group">
+      <label for="userInput">Describe your image or upload a file:</label>
+      <input type="file" id="imageUpload" accept="image/*" />
+      <textarea id="userInput" rows="3" placeholder="Describe your image or message..."></textarea>
+    </div>
+
+    <div class="input-group">
+      <label for="presetSelect">Choose a style preset:</label>
+      <select id="presetSelect">
+        <option value="default">Default (No Preset)</option>
+        <option value="mutual-aid-magic">Mutual Aid Magic</option>
+        <option value="apocalyptic-optimism">Apocalyptic Optimism</option>
+        <option value="union-hall-throwdown">Union Hall Throwdown</option>
+        <option value="the-future-is-black">The Future Is Black</option>
+        <option value="hyperlocal-uprising">Hyperlocal Uprising</option>
+        <option value="protest-as-prayer">Protest As Prayer</option>
+        <option value="side-eyeing-the-state">Side-Eyeing the State</option>
+      </select>
+    </div>
+
+    <button onclick="generateOutput()">Generate Creative Suite</button>
+
+    <div class="output" id="output"></div>
+  </div>
+
+  <script>
+    function generateOutput() {
+      const userInput = document.getElementById('userInput').value.trim();
+      const preset = document.getElementById('presetSelect').value;
+      const outputDiv = document.getElementById('output');
+
+      if (!userInput && !document.getElementById('imageUpload').files.length) {
+        alert('Please upload an image or enter a description.');
+        return;
+      }
+
+      const platforms = ['Pinterest', 'Instagram', 'Flashes', 'Lemon8', 'TikTok Share', 'Meme Copy Output'];
+
+      let outputText = `<h2>Creative Suite Output</h2>`;
+      platforms.forEach(platform => {
+        outputText += `<h3>${platform}</h3>`;
+        outputText += `<pre>${generatePlatformOutput(platform, userInput, preset)}</pre>`;
+      });
+
+      outputDiv.innerHTML = outputText;
+    }
+
+    function generatePlatformOutput(platform, input, preset) {
+      // Placeholder generator, customize per platform!
+      let baseText = `${platform} content for "${input}" using the "${preset}" preset.`;
+      switch(platform) {
+        case 'Pinterest':
+          return baseText + '\n- Title: Bold Resistance\n- Hashtags: #Resistance #MutualAid\n- Alt Text: Description of the image emphasizing solidarity.';
+        case 'Instagram':
+          return baseText + '\n- Caption: Rise up and resist ✊\n- Hashtags: #Activism #Solidarity #PowerToThePeople\n- Poll: What gives you hope today?\n- Song Suggestions: "Alright" by Kendrick Lamar, "Glory" by Common & John Legend';
+        case 'Flashes':
+          return baseText + '\n- Title: Flash of Defiance\n- CTA: Share to spark change.\n- Filter Suggestion: Gritty Film';
+        case 'Lemon8':
+          return baseText + '\n- Headline: Community Over Chaos\n- CTA: Comment with your local mutual aid group!\n- Sticker Suggestion: ✊🖤';
+        case 'TikTok Share':
+          return baseText + '\n- Caption: "The revolution will not be televised—it will be uploaded."\n- Song Suggestion: "Run the World" by Beyoncé\n- Engagement: Duet this with your protest art!';
+        case 'Meme Copy Output':
+          return baseText + '\n- Caption: When fear knocks, answer with unity.\n- Overlay Text: FEAR IS A LIAR\n- Font: Bold Impact\n- Notes: Text centered, high contrast.';
+        default:
+          return baseText;
+      }
+    }
+  </script>
+</body>
+</html>
